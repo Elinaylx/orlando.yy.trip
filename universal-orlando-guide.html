@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奥兰多环球影城 - 完整游玩攻略</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* 导航栏 */
+        nav {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 0.125rem 0.625rem rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: clamp(1rem, 3vw, 2rem);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #fbbf24;
+        }
+
+        /* 主横幅 */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=1200') center/cover;
+            min-height: 60vh;
+            height: clamp(400px, 60vh, 600px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 5%;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 1rem;
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(0,0,0,0.5);
+        }
+
+        .hero-btn {
+            background: #fbbf24;
+            color: #1e3a8a;
+            padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+            text-decoration: none;
+            border-radius: 3.125rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4);
+        }
+
+        /* 通用容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 4rem) 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            color: #1e3a8a;
+            margin-bottom: clamp(2rem, 4vw, 3rem);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: clamp(60px, 15vw, 100px);
+            height: 0.25rem;
+            background: #fbbf24;
+        }
+
+        /* 园区卡片 */
+        .parks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 4rem;
+        }
+
+        .park-card {
+            background: white;
+            border-radius: 0.9375rem;
+            overflow: hidden;
+            box-shadow: 0 0.3125rem 1.25rem rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .park-card:hover {
+            transform: translateY(-0.625rem);
+            box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.2);
+        }
+
+        .park-card img {
+            width: 100%;
+            height: clamp(180px, 30vw, 200px);
+            object-fit: cover;
+        }
+
+        .park-card-content {
+            padding: clamp(1rem, 3vw, 1.5rem);
+        }
+
+        .park-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+
+        .park-card p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .new-badge {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1.25rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        /* 地图区域 */
+        .map-section {
+            background: #f3f4f6;
+        }
+
+        .map-tabs {
+            display: flex;
+            justify-content: center;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .map-tab {
+            padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+            background: white;
+            border: 0.125rem solid #1e3a8a;
+            border-radius: 3.125rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+
+        .map-tab:hover, .map-tab.active {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .map-content {
+            display: none;
+            background: white;
+            padding: clamp(1rem, 3vw, 2rem);
+            border-radius: 0.9375rem;
+            box-shadow: 0 0.3125rem 1.25rem rgba(0,0,0,0.1);
+        }
+
+        .map-content.active {
+            display: block;
+        }
+
+        .map-placeholder {
+            background: #e5e7eb;
+            height: clamp(250px, 50vw, 400px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.625rem;
+            margin-bottom: 1rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: #666;
+            padding: 1rem;
+        }
+
+        .map-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .map-info-item {
+            background: #f9fafb;
+            padding: clamp(0.75rem, 2vw, 1rem);
+            border-radius: 0.5rem;
+            border-left: 0.25rem solid #fbbf24;
+        }
+
+        .map-info-item h4 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+        }
+
+        .map-info-item p {
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+        }
+
+        /* 攻略区域 */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .guide-card {
+            background: white;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            border-radius: 0.9375rem;
+            box-shadow: 0 0.3125rem 1.25rem rgba(0,0,0,0.1);
+            border-top: 0.3125rem solid #fbbf24;
+        }
+
+        .guide-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+
+        .guide-card ul {
+            list-style: none;
+        }
+
+        .guide-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .guide-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #fbbf24;
+            font-weight: bold;
+        }
+
+        /* 链接区域 */
+        .links-section {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        .links-section .section-title {
+            color: white;
+        }
+
+        .links-section .section-title::after {
+            background: #fbbf24;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .link-card {
+            background: rgba(255,255,255,0.1);
+            padding: clamp(1.5rem, 3vw, 2rem);
+            border-radius: 0.9375rem;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .link-card:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .link-card a {
+            color: white;
+            text-decoration: none;
+            font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+            font-weight: 600;
+        }
+
+        .link-card p {
+            margin-top: 0.5rem;
+            opacity: 0.9;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* 页尾 */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: clamp(1.5rem, 3vw, 2rem);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                gap: 0.75rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .map-tab {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .parks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: clamp(1rem, 3vw, 2rem);
+            right: clamp(1rem, 3vw, 2rem);
+            background: #fbbf24;
+            color: #1e3a8a;
+            width: clamp(45px, 10vw, 50px);
+            height: clamp(45px, 10vw, 50px);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0.3125rem 0.9375rem rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: bold;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul>
+            <li><a href="#parks">主题乐园</a></li>
+            <li><a href="#maps">园区地图</a></li>
+            <li><a href="#guide">游玩攻略</a></li>
+            <li><a href="#links">实用链接</a></li>
+        </ul>
+    </nav>
+
+    <!-- 主横幅 -->
+    <div class="hero">
+        <h1>奥兰多环球影城</h1>
+        <p>探索四大主题乐园，开启史诗级冒险之旅</p>
+        <a href="#parks" class="hero-btn">开始探索</a>
+    </div>
+
+    <!-- 主题乐园区域 -->
+    <section id="parks" class="container">
+        <h2 class="section-title">四大主题乐园</h2>
+        <div class="parks-grid">
+            <div class="park-card">
+                <img src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=600" alt="Universal Studios Florida">
+                <div class="park-card-content">
+                    <h3>Universal Studios Florida</h3>
+                    <p>佛罗里达环球影城</p>
+                    <p>走进好莱坞电影世界，体验变形金刚、小黄人、辛普森一家等经典IP项目。</p>
+                </div>
+            </div>
+
+            <div class="park-card">
+                <img src="https://images.unsplash.com/photo-1583495719280-fd6d00b0d3e5?w=600" alt="Islands of Adventure">
+                <div class="park-card-content">
+                    <h3>Islands of Adventure</h3>
+                    <p>冒险岛乐园</p>
+                    <p>探索哈利波特魔法世界，乘坐刺激的过山车，体验侏罗纪公园和漫威超级英雄岛。</p>
+                </div>
+            </div>
+
+            <div class="park-card">
+                <img src="https://images.unsplash.com/photo-1565024096953-84bf1dcb8e89?w=600" alt="Volcano Bay">
+                <div class="park-card-content">
+                    <h3>Volcano Bay</h3>
+                    <p>火山湾水上乐园</p>
+                    <p>在热带天堂般的水上乐园中放松身心，享受惊险刺激的水上滑梯和懒人河漂流。</p>
+                </div>
+            </div>
+
+            <div class="park-card">
+                <img src="https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=600" alt="Epic Universe">
+                <div class="park-card-content">
+                    <h3>Epic Universe <span class="new-badge">2025新开</span></h3>
+                    <p>史诗宇宙乐园</p>
+                    <p>全新第四座主题乐园！包含超级任天堂世界、驯龙高手、哈利波特魔法部等五大主题区域。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 地图区域 -->
+    <section id="maps" class="map-section">
+        <div class="container">
+            <h2 class="section-title">园区地图</h2>
+            
+            <div class="map-tabs">
+                <div class="map-tab active" onclick="showMap('usf')">Universal Studios Florida</div>
+                <div class="map-tab" onclick="showMap('ioa')">Islands of Adventure</div>
+                <div class="map-tab" onclick="showMap('vb')">Volcano Bay</div>
+                <div class="map-tab" onclick="showMap('eu')">Epic Universe</div>
+            </div>
+
+            <!-- USF 地图 -->
+            <div id="map-usf" class="map-content active">
+                <div class="map-placeholder">
+                    <div style="text-align: center;">
+                        <h3>Universal Studios Florida</h3>
+                        <p>请访问官方网站查看完整地图</p>
+                    </div>
+                </div>
+                <div class="map-info">
+                    <div class="map-info-item">
+                        <h4>🎬 热门项目</h4>
+                        <p>变形金刚3D、小黄人、哈利波特对角巷、辛普森一家飞车</p>
+                    </div>
+                    <div class="map-info-item">
+                        <h4>🍔 推荐餐厅</h4>
+                        <p>三把扫帚酒吧、MEL's Drive-In</p>
+                    </div>
+                    <div class="map-info-item">
+                        <h4>📍 必打卡</h4>
+                        <p>环球地球标志、霍格沃茨特快列车</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IOA 地图 -->
+            <div id="map-ioa" class="map-content">
+                <div class="map-placeholder">
+                    <div style="text-align: center;">
+                        <h3>Islands of Adventure</h3>
+                        <p>请访问官方网站查看完整地图</p>
+                    </div>
+                </div>
+                <div class="map-info">
+                    <div class="map-info-item">
+                        <h4>🎢 热门项目</h4>
+                        <p>哈利波特禁忌之旅、侏罗纪公园激流勇进、绿巨人过山车</p>
+                    </div>
+                    <div class="map-info-item">
+                        <h4>🍕 推荐餐厅</h4>
+                        <p>三把扫帚酒吧、雷电神餐厅</p>
+                    </div>
+                    <div class="map-info-item">
+                        <h4>🏰 必打卡</h4>
+                        <p>霍格沃茨城堡、苏斯博士奇幻世界</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Volcano Bay 地图 -->
+            <div id="map-vb" class="map-content">
+                <div class="map-placeholder">
+                    <div style="text-align: center;">
+                        <h3>Volcano Bay</h3>
+                        <p>请访问官方网站查看完整地图</p>
+                    </div>
+                </div>
+                <div class="map-info">
+                    <div class="map-info-item">
+                        <h4>💦 热门项目</h4>
+                        <p>Ko'okiri Body Plunge、Krakatau Aqua Coaster</p>
+                    </div>
+                    <div class="map-info-item">
+                        <h4>🌴 放松区域</h4>
+                        <p>懒人河、波浪池</p>
+                    </div>
+                    <div class="map-info-item">
+                        <h4>⚠️ 温馨提示</h4>
+                        <p>记得携带防晒霜、更衣柜需额外付费</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Epic Universe 地图 -->
+            <div id="map-eu" class="map-content">
+                <div class="map-placeholder">
+                    <div style="text-align: center;">
+                        <h3>Epic Universe</h3>
+                        <p>2025年5月22日正式开放</p>
+                    </div>
+                </div>
+                <div class="map-info">
+                    <div class="map-info-item">
+                        <h4>🌟 五大主题区</h4>
+                        <p>Celestial Park、Super Nintendo World、Dark Universe、驯龙高手、哈利波特魔法部</p>
+                    </div>
+                    <div class="map-info-item">
+                        <h4>🎮 明星项目</h4>
+                        <p>马里奥赛车、星尘竞速者、魔法部大战</p>
+                    </div>
+                    <div class="map-info-item">
+                        <h4>🏨 配套酒店</h4>
+                        <p>Helios Grand Hotel提供专属入口</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 攻略区域 -->
+    <section id="guide" class="container">
+        <h2 class="section-title">游玩攻略</h2>
+        <div class="guide-grid">
+            <div class="guide-card">
+                <h3>🎫 入园须知</h3>
+                <ul>
+                    <li>开放时间：通常9:00 AM - 9:00 PM（具体以官网为准）</li>
+                    <li>门票类型：单日票、多日票、年卡</li>
+                    <li>快速通行证：Universal Express可减少排队时间</li>
+                    <li>提前在线购票可享优惠</li>
+                    <li>Epic Universe需单独购票或购买组合票</li>
+                </ul>
+            </div>
+
+            <div class="guide-card">
+                <h3>🗺️ 路线推荐</h3>
+                <ul>
+                    <li><strong>一日游：</strong>重点游玩一个园区，建议Islands of Adventure</li>
+                    <li><strong>两日游：</strong>第一天USF+对角巷，第二天IOA+霍格莫德</li>
+                    <li><strong>三日游：</strong>加入Epic Universe体验最新项目</li>
+                    <li><strong>带娃路线：</strong>优先苏斯博士区域和小黄人项目</li>
+                    <li>使用霍格沃茨特快在两个园区间穿梭</li>
+                </ul>
+            </div>
+
+            <div class="guide-card">
+                <h3>⭐ 热门项目TOP 5</h3>
+                <ul>
+                    <li>哈利波特禁忌之旅（IOA）</li>
+                    <li>变形金刚3D对决（USF）</li>
+                    <li>马里奥赛车（Epic Universe）</li>
+                    <li>哈利波特魔法部大战（Epic Universe）</li>
+                    <li>绿巨人过山车（IOA）</li>
+                </ul>
+            </div>
+
+            <div class="guide-card">
+                <h3>🍽️ 餐饮推荐</h3>
+                <ul>
+                    <li><strong>三把扫帚酒吧：</strong>品尝黄油啤酒和英式餐点</li>
+                    <li><strong>破釜酒吧：</strong>哈利波特主题餐厅</li>
+                    <li><strong>Toothsome Chocolate Emporium：</strong>甜点爱好者天堂</li>
+                    <li><strong>Vivo Italian Kitchen：</strong>正宗意大利美食</li>
+                    <li>园区内饮料较贵，建议自带水瓶</li>
+                </ul>
+            </div>
+
+            <div class="guide-card">
+                <h3>💡 实用贴士</h3>
+                <ul>
+                    <li><strong>最佳时间：</strong>9-11月或1-2月，人少天气好</li>
+                    <li><strong>避开高峰：</strong>开园即冲刺热门项目</li>
+                    <li><strong>使用App：</strong>实时查看排队时间</li>
+                    <li><strong>储物柜：</strong>部分项目要求寄存物品</li>
+                    <li><strong>拍照打卡：</strong>环球地球、霍格沃茨城堡、Epic Universe入口</li>
+                    <li>穿舒适的鞋子，准备暴走一整天</li>
+                </ul>
+            </div>
+
+            <div class="guide-card">
+                <h3>🎒 必带物品</h3>
+                <ul>
+                    <li>防晒霜和太阳镜</li>
+                    <li>轻便雨衣（佛罗里达常下雨）</li>
+                    <li>充电宝和充电线</li>
+                    <li>相机或手机</li>
+                    <li>轻便背包</li>
+                    <li>身份证件和信用卡</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实用链接 -->
+    <section id="links" class="links-section">
+        <div class="container">
+            <h2 class="section-title">实用链接</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="https://www.universalorlando.com" target="_blank">🏠 官方网站</a>
+                    <p>最新资讯和园区信息</p>
+                </div>
+                <div class="link-card">
+                    <a href="https://www.universalorlando.com/web/en/us/tickets-packages" target="_blank">🎫 门票购买</a>
+                    <p>在线购票享优惠</p>
+                </div>
+                <div class="link-card">
+                    <a href="https://www.universalorlando.com/web/en/us/plan-your-visit/hours-information" target="_blank">⏰ 开放时间</a>
+                    <p>查看实时园区时间</p>
+                </div>
+                <div class="link-card">
+                    <a href="https://www.weather.com/weather/today/l/Orlando+FL" target="_blank">🌤️ 天气查询</a>
+                    <p>查看奥兰多天气预报</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页尾 -->
+    <footer>
+        <p>联系方式：YY 5174903997</p>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" onclick="scrollToTop()">↑</div>
+
+    <script>
+        // 地图切换功能
+        function showMap(parkId) {
+            // 隐藏所有地图内容
+            const mapContents = document.querySelectorAll('.map-content');
+            mapContents.forEach(content => content.classList.remove('active'));
+            
+            // 移除所有标签的active状态
+            const tabs = document.querySelectorAll('.map-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // 显示选中的地图
+            document.getElementById(`map-${parkId}`).classList.add('active');
+            
+            // 高亮选中的标签
+            event.target.classList.add('active');
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 返回顶部按钮
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
